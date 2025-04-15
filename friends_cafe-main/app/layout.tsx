@@ -1,35 +1,31 @@
-import type { Metadata } from 'next'
-import './globals.css'
-import { CartProvider } from '@/hooks/use-cart'
-import { AuthProvider } from '@/hooks/use-auth'
-import { ThemeProvider } from '@/components/theme-provider'
+import type { Metadata } from "next"
+import { Inter } from "next/font/google"
+import "./globals.css"
+import { ThemeProvider } from "@/components/theme-provider"
+
+const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: 'Friends Cafe',
-  description: 'Order delicious food from Friends Cafe',
-  generator: 'v0.dev',
+  title: "Friends Cafe",
+  description: "Welcome to Friends Cafe - Your favorite coffee spot",
 }
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode
-}>) {
+}) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body>
+      <head />
+      <body className={inter.className}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="light"
-          enableSystem={false}
+          defaultTheme="system"
+          enableSystem
           disableTransitionOnChange
-          storageKey="friends-cafe-theme"
         >
-          <AuthProvider>
-            <CartProvider>
-              {children}
-            </CartProvider>
-          </AuthProvider>
+          {children}
         </ThemeProvider>
       </body>
     </html>
